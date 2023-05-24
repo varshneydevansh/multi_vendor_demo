@@ -31,7 +31,7 @@ class _MainScreenState extends State<MainScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       bottomNavigationBar: BottomNavigationBar(
-          type: BottomNavigationBarType.fixed,
+          //type: BottomNavigationBarType.fixed,
           currentIndex: _pageIndex,
           onTap: (value) {
             setState(() {
@@ -74,7 +74,7 @@ class _MainScreenState extends State<MainScreen> {
                 ),
                 label: 'Account'),
           ]),
-      body: _pages[0],
+      body: _pages[_pageIndex],
     );
   }
 }
