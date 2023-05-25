@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
-import 'package:multi_vendor_demo/views/buyers/nav_screens/search_widget_top.dart';
+//import 'package:flutter_svg/svg.dart';
+import 'package:multi_vendor_demo/views/buyers/nav_screens/nav_screen_widget/banneR_widget.dart';
+import 'package:multi_vendor_demo/views/buyers/nav_screens/nav_screen_widget/search_widget_top.dart';
 
 import 'nav_screen_widget/welcome_widget.dart';
 
@@ -9,15 +10,14 @@ class HomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: EdgeInsets.only(
-          top: MediaQuery.of(context).padding.top, left: 25, right: 15),
-      child: Column(children: [
-        Welcome(),
-        SizedBox(height: 20,),
-        SearchWidgetTop()
-      ]),
-    );
+    return Column(children: [
+      Welcome(),
+      SizedBox(height: 20,),
+      BannerWidget(),
+      SizedBox(height: 20,),
+      SearchWidgetTop(),
+      
+    ]);
   }
 }
 
