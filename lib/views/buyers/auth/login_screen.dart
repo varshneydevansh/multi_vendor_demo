@@ -1,25 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:multi_vendor_demo/views/buyers/auth/login_screen.dart';
+import 'package:multi_vendor_demo/views/buyers/auth/register_screen.dart';
 
-import '../../../controllers/auth_controller.dart';
-
-// ignore: must_be_immutable
-class RegisterScreen extends StatelessWidget {
-  
-  //creating the constructor for the AuthController class
-  // 
-  final AuthController _authController = AuthController();
-  late String fullName, phoneNumber, email, password;
-  signupUser() async {
-    String result = await _authController.signupUsers(
-        fullName, phoneNumber, email, password);
-    if (result != 'Sucess') {
-      print(result);
-    } else{
-     print(result);
-      
-    }
-  }
+class LoginScreen extends StatelessWidget {
+  const LoginScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -33,39 +16,13 @@ class RegisterScreen extends StatelessWidget {
                 height: 400,
                 width: 400),
             Text(
-              'Join the Trusted Marketplace',
+              'Good to see you again!',
               style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
             ),
+            
             Padding(
               padding: const EdgeInsets.all(8.0),
               child: TextFormField(
-                //value is the any value entered by the user
-                onChanged: (value) {
-                  fullName = value;
-                },
-                decoration: InputDecoration(
-                  hintText: 'Enter your Full Name',
-                  fillColor: Colors.white,
-                  filled: true,
-                  border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(10),
-                      borderSide: BorderSide.none),
-                  prefixIcon: Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: Icon(
-                      Icons.person,
-                      color: const Color.fromARGB(255, 250, 101, 150),
-                    ),
-                  ),
-                ),
-              ),
-            ),
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: TextFormField(
-                onChanged: (value) {
-                  phoneNumber = value;
-                },
                 keyboardType: TextInputType.number,
                 decoration: InputDecoration(
                   hintText: 'Enter Phone Number',
@@ -87,9 +44,6 @@ class RegisterScreen extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.all(8.0),
               child: TextFormField(
-                onChanged: (value) {
-                  email = value;
-                },
                 decoration: InputDecoration(
                   hintText: 'Enter your email',
                   fillColor: Colors.white,
@@ -110,9 +64,6 @@ class RegisterScreen extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.all(8.0),
               child: TextFormField(
-                onChanged: (value) {
-                  password = value;
-                },
                 obscureText: true,
                 decoration: InputDecoration(
                   hintText: 'Enter your password',
@@ -131,42 +82,37 @@ class RegisterScreen extends StatelessWidget {
                 ),
               ),
             ),
-            GestureDetector(
-              onTap: () {
-                signupUser();
-              },
-              child: Container(
-                width: MediaQuery.of(context).size.width * 0.9,
-                height: 50,
-                child: ElevatedButton(
-                  style: ElevatedButton.styleFrom(
-                    primary: Color.fromARGB(255, 95, 203, 194),
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(10),
-                    ),
+            Container(
+              width: MediaQuery.of(context).size.width * 0.9,
+              height: 50,
+              child: ElevatedButton(
+                style: ElevatedButton.styleFrom(
+                  primary: Color.fromARGB(255, 95, 203, 194),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(10),
                   ),
-                  onPressed: () {},
-                  child: Text('Register',
-                      style: TextStyle(
-                          color: Colors.white,
-                          fontSize: 20,
-                          )),
                 ),
+                onPressed: () {},
+                child: Text('Login',
+                    style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 20,
+                        )),
               ),
             ),
             SizedBox(
-              height: 100,
+              height: 200,
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Text('Already using uNIEKplace?',
+                Text('New to uNIEKplace?',
                     style: TextStyle(fontSize: 15)),
                 TextButton(
                   onPressed: () {
-                    Navigator.push(context, MaterialPageRoute(builder: (context) => LoginScreen()),);
+                    Navigator.push(context, MaterialPageRoute(builder: (context) => RegisterScreen()),);
                   },
-                  child: Text('Login',
+                  child: Text('Register',
                       style: TextStyle(
                           color: Color.fromARGB(255, 250, 101, 150),
                           fontSize: 15)),
@@ -174,8 +120,11 @@ class RegisterScreen extends StatelessWidget {
               ],
             ),
           ],
+          
         ),
+        
       ),
+      
     );
   }
 }
