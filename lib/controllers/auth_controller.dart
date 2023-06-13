@@ -16,17 +16,22 @@ class AuthController {
           password.isNotEmpty) {
         //creating user  and the await is used because it takes time to create user and we are using async
         // and storing the created user data in userCredential variable
-        UserCredential userCredential = await _auth
-            .createUserWithEmailAndPassword(email: email, password: password);
+        UserCredential userCredential = await _auth.createUserWithEmailAndPassword(email: email, password: password);
 
 
             error_variable = 'Sucess';
       } else {
         error_variable = 'Please fill all the fields';
       }
-    } catch (e) {
-      return e.toString();
-    }
+    } on FirebaseAuthException catch (e) {
+  if (e.code == 'weak-password') {
+    error_variable = 'The password provided is too weak.';
+  } else if (e.code == 'email-already-in-use') {
+    error_variable = 'The account already exists for that email.';
+  }
+} catch (e) {
+  return e.toString();
+}
     return error_variable;
   }
 }

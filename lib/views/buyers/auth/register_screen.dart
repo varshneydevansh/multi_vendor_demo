@@ -10,7 +10,7 @@ class RegisterScreen extends StatelessWidget {
   // 
   final AuthController _authController = AuthController();
   late String fullName, phoneNumber, email, password;
-  signupUser() async {
+  _signupUser() async {
     String result = await _authController.signupUsers(
         fullName, phoneNumber, email, password);
     if (result != 'Sucess') {
@@ -39,6 +39,12 @@ class RegisterScreen extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.all(8.0),
               child: TextFormField(
+                validator: (value) {
+                  if (value!.isEmpty) {
+                    return 'Please enter your Full Name';
+                  }
+                  return null;
+                },
                 //value is the any value entered by the user
                 onChanged: (value) {
                   fullName = value;
@@ -63,6 +69,12 @@ class RegisterScreen extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.all(8.0),
               child: TextFormField(
+                validator: (value) {
+                  if (value!.isEmpty) {
+                    return 'Please enter your Phone Number';
+                  }
+                  return null;
+                },
                 onChanged: (value) {
                   phoneNumber = value;
                 },
@@ -87,6 +99,12 @@ class RegisterScreen extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.all(8.0),
               child: TextFormField(
+                validator: (value) {
+                  if (value!.isEmpty) {
+                    return 'Please enter your email';
+                  }
+                  return null;
+                },
                 onChanged: (value) {
                   email = value;
                 },
@@ -110,6 +128,12 @@ class RegisterScreen extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.all(8.0),
               child: TextFormField(
+                validator: (value) {
+                  if (value!.isEmpty) {
+                    return 'Please enter your password';
+                  }
+                  return null;
+                },
                 onChanged: (value) {
                   password = value;
                 },
@@ -131,11 +155,7 @@ class RegisterScreen extends StatelessWidget {
                 ),
               ),
             ),
-            GestureDetector(
-              onTap: () {
-                signupUser();
-              },
-              child: Container(
+             Container(
                 width: MediaQuery.of(context).size.width * 0.9,
                 height: 50,
                 child: ElevatedButton(
@@ -145,7 +165,7 @@ class RegisterScreen extends StatelessWidget {
                       borderRadius: BorderRadius.circular(10),
                     ),
                   ),
-                  onPressed: () {},
+                  onPressed: () {_signupUser();},
                   child: Text('Register',
                       style: TextStyle(
                           color: Colors.white,
@@ -153,7 +173,7 @@ class RegisterScreen extends StatelessWidget {
                           )),
                 ),
               ),
-            ),
+            
             SizedBox(
               height: 100,
             ),
