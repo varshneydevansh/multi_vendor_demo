@@ -1,9 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:multi_vendor_demo/views/buyers/auth/register_screen.dart';
 
-class LoginScreen extends StatelessWidget {
-  const LoginScreen({super.key});
+// class LoginScreen extends StatefulWidget {
+//   @override
+//   State<RegisterScreen> createState() => _LoginScreenState();
+// }
 
+// ignore: must_be_immutable
+class LoginScreen extends StatelessWidget {
+  
+  late String email, password;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -20,30 +26,48 @@ class LoginScreen extends StatelessWidget {
               style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
             ),
             
+            // Padding(
+            //   padding: const EdgeInsets.all(8.0),
+            //   child: TextFormField(
+            //     validator: (value) {
+            //       if (value!.isEmpty) {
+            //         return 'Please enter your email';
+            //       }
+            //       return null;
+            //     },
+            //     onChanged: (value) {
+            //       email = value;
+            //     },
+            //     keyboardType: TextInputType.number,
+            //     decoration: InputDecoration(
+            //       hintText: 'Enter Phone Number',
+            //       fillColor: Colors.white,
+            //       filled: true,
+            //       border: OutlineInputBorder(
+            //           borderRadius: BorderRadius.circular(10),
+            //           borderSide: BorderSide.none),
+            //       prefixIcon: Padding(
+            //         padding: const EdgeInsets.all(8.0),
+            //         child: Icon(
+            //           Icons.phone_android,
+            //           color: const Color.fromARGB(255, 250, 101, 150),
+            //         ),
+            //       ),
+            //     ),
+            //   ),
+            // ),
             Padding(
               padding: const EdgeInsets.all(8.0),
               child: TextFormField(
-                keyboardType: TextInputType.number,
-                decoration: InputDecoration(
-                  hintText: 'Enter Phone Number',
-                  fillColor: Colors.white,
-                  filled: true,
-                  border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(10),
-                      borderSide: BorderSide.none),
-                  prefixIcon: Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: Icon(
-                      Icons.phone_android,
-                      color: const Color.fromARGB(255, 250, 101, 150),
-                    ),
-                  ),
-                ),
-              ),
-            ),
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: TextFormField(
+                validator: (value) {
+                  if (value!.isEmpty) {
+                    return 'Please enter your email';
+                  }
+                  return null;
+                },
+                onChanged: (value) {
+                  email = value;
+                },
                 decoration: InputDecoration(
                   hintText: 'Enter your email',
                   fillColor: Colors.white,
@@ -64,6 +88,12 @@ class LoginScreen extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.all(8.0),
               child: TextFormField(
+                validator: (value) {
+                  if (value!.isEmpty) {
+                    return 'Please enter your password';
+                  }
+                  return null;
+                },
                 obscureText: true,
                 decoration: InputDecoration(
                   hintText: 'Enter your password',
