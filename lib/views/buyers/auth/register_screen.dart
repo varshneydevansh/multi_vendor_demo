@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:multi_vendor_demo/utils/show_snackBar.dart';
 import 'package:multi_vendor_demo/views/buyers/auth/login_screen.dart';
+import 'package:multi_vendor_demo/views/buyers/main_screen.dart';
 
 import '../../../controllers/auth_controller.dart';
 
@@ -25,15 +26,23 @@ class _RegisterScreenState extends State<RegisterScreen> {
     if (_formKey.currentState!.validate()) {
       //if the form is valid then it will execute the code below
       //resseting the form after the user has sucessfully signed up
-      _authController
-          .signupUsers(fullName, phoneNumber, email, password)
-          .whenComplete(() {
-        _formKey.currentState!.reset();
-        setState(() {
-          _isLoading = false;
-        });
-      });
-      return showSnack(context, 'Badhaai ho! You have successfully joined');
+      String signup_result = await _authController
+          .signupUsers(fullName, phoneNumber, email, password);
+      //     .whenComplete(() {
+      //   _formKey.currentState!.reset();
+      //   setState(() {
+      //     _isLoading = false;
+      //   });
+      // });
+      showSnack(context, 'Badhaai ho! You have successfully joined');
+      if(signup_result == 'Sucess')
+      {
+        return Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => MainScreen()));
+      }
+      else{
+        return showSnack(context, signup_result);
+      }
+      
     } else {
       setState(() {
         _isLoading = false;

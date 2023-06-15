@@ -2,11 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:multi_vendor_demo/controllers/auth_controller.dart';
 import 'package:multi_vendor_demo/utils/show_snackBar.dart';
 import 'package:multi_vendor_demo/views/buyers/auth/register_screen.dart';
-
+import 'package:multi_vendor_demo/views/buyers/main_screen.dart';
 
 // ignore: must_be_immutable
 class LoginScreen extends StatefulWidget {
-  
   @override
   State<LoginScreen> createState() => _LoginScreenState();
 }
@@ -16,15 +15,17 @@ class _LoginScreenState extends State<LoginScreen> {
   final _formKey = GlobalKey<FormState>();
   final AuthController _authController = AuthController();
 
-  _loginUsers() async
-  {
-    if(_formKey.currentState!.validate())
-    {
-      await _authController.loginUsers(email, password);
-      return showSnack(context, 'Successfully logged in');
-    }
-    else
-    {
+  _loginUsers() async {
+    if (_formKey.currentState!.validate()) {
+      String login_result = await _authController.loginUsers(email, password);
+      //checking if the login result is sucess or not means the user exist or not
+      if (login_result == 'Sucess') {
+        return Navigator.pushReplacement(
+            context, MaterialPageRoute(builder: (context) => MainScreen()));
+      } else {
+        return showSnack(context, login_result);
+      }
+    } else {
       return showSnack(context, 'Please enter valid details');
     }
   }
@@ -46,7 +47,6 @@ class _LoginScreenState extends State<LoginScreen> {
                 'Good to see you again!',
                 style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
               ),
-              
               Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: TextFormField(
@@ -121,9 +121,9 @@ class _LoginScreenState extends State<LoginScreen> {
                   },
                   child: Text('Login',
                       style: TextStyle(
-                          color: Colors.white,
-                          fontSize: 20,
-                          )),
+                        color: Colors.white,
+                        fontSize: 20,
+                      )),
                 ),
               ),
               SizedBox(
@@ -132,11 +132,14 @@ class _LoginScreenState extends State<LoginScreen> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Text('New to uNIEKplace?',
-                      style: TextStyle(fontSize: 15)),
+                  Text('New to uNIEKplace?', style: TextStyle(fontSize: 15)),
                   TextButton(
                     onPressed: () {
-                      Navigator.push(context, MaterialPageRoute(builder: (context) => RegisterScreen()),);
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => RegisterScreen()),
+                      );
                     },
                     child: Text('Register',
                         style: TextStyle(
@@ -146,12 +149,9 @@ class _LoginScreenState extends State<LoginScreen> {
                 ],
               ),
             ],
-            
           ),
         ),
-        
       ),
-      
     );
   }
 }

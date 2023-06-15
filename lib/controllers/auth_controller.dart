@@ -6,7 +6,7 @@ class AuthController {
   //type string because the types of the function is string
   final FirebaseAuth _auth = FirebaseAuth.instance;
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
-  Future<String> signupUsers(String fullName, String phoneNumber, String email,
+ signupUsers(String fullName, String phoneNumber, String email,
       String password) async {
     //storing user data in firebase database
     String error_variable =
